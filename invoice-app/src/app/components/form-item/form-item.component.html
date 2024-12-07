@@ -1,0 +1,70 @@
+<form class="w-50" (ngSubmit)="addItem(itemForm)" #itemForm="ngForm">
+
+    <div class="form-group">
+        <label for="product">Producto</label>
+        <input type="text" class="form-control" id="product" 
+        name="product" [(ngModel)]="item.product" placeholder="Producto" required
+        minlength="5" maxlength="12" #product="ngModel">
+    </div>
+   
+    @if (product.invalid && (product.dirty || product.touched)) {
+
+      @if (product.errors!['required']) {
+        <div class="text-danger">El Producto es requerido</div>
+      }
+
+      @if (product.errors!['minlength']) {
+        <div class="text-danger">El nombre del Producto debe tener al menos 5 caracteres</div>
+      }
+
+      @if (product.errors!['minlength']) {
+        <div class="text-danger">El nombre del Producto debe tener como maximo 12 caracteres</div>
+      }
+
+    }
+    
+    
+    <div class="form-group">
+        <label for="price">Precio</label>
+        <input type="number" class="form-control" id="price" 
+        name="price" [(ngModel)]="item.price" placeholder="Precio" required
+        min="5" #price="ngModel">
+    </div>
+
+    @if (price.invalid && (price.dirty || price.touched)) {
+
+        @if (price.errors!['required']) {
+          <div class="text-danger">El Precio es requerido</div>
+        }
+  
+        @if (price.errors!['min']) {
+          <div class="text-danger">El Precio minimo es 5</div>
+        }
+  
+  
+      }
+
+    <div class="form-group">
+        <label for="quantity">Cantidad</label>
+        <input type="number" class="form-control" id="quantity"
+         name="quantity" [(ngModel)]="item.quantity" placeholder="Cantidad" required
+         min="1" #quantity="ngModel">
+    </div>
+
+    @if (quantity.invalid && (quantity.dirty || quantity.touched)) {
+
+        @if (quantity.errors!['required']) {
+          <div class="text-danger">La Cantidad es requerida</div>
+        }
+  
+        @if (quantity.errors!['min']) {
+          <div class="text-danger">La Cantidad minima es 1</div>
+        }
+  
+  
+      }
+
+    <button type="submit" class="btn btn-primary my-3" [disabled]="itemForm.invalid">
+        Agregar Item</button>
+
+</form>
